@@ -1,0 +1,14 @@
+This is tutorial 1. 
+
+It aims to teach you how to create an ERC 20 token and launch it onto the live blockchain. 
+
+We will use the online Remix IDE (to compile the token smart contract and also to deploy it). 
+
+Using the online Remix IDE means we do not need to install any tools locally. This makes it a simple and easy way to get started quickly. 
+
+The tutorial aims to show all steps involved in deploying an ERC 20 smart contract to the blockchain.
+
+We will use Metamask and Remix IDE. We use the OpenZeppelin standards to do the heavy lifting and really simplify (and secure) the SmartContract we deploy.
+
+The code is written in Solidity and compiled in Remix. Remix also deploys the contract (MetaMask does not support deploying contracts). 
+
