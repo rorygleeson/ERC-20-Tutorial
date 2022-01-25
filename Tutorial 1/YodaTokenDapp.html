@@ -1,0 +1,1094 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/3.0.0-rc.5/web3.min.js"></script>
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <title>YODA Token + DEX</title>
+   </head>
+   <body>
+      <style>
+         /* Used for Metamask icon*/
+         .meta-gray {
+         -webkit-filter: grayscale(1);
+         }
+         .meta-normal {
+         -webkit-filter: grayscale(0);
+         }
+         /* Rounded border */
+         hr.rounded {
+         border-top: 8px solid #bbb;
+         border-radius: 5px;
+         }
+         /* Solid border */
+         hr.solid {
+         border-top: 3px solid #bbb;
+         }
+      </style>
+      <div class="container">
+         <div style="margin-top: 30px;background-color:#F6F6F6;" class="row text-center">
+            <div class="col-md-12">
+				<hr class="rounded">
+				<br><br>
+               <h2>YODA TOKEN</h2>
+			   <img src="y1.png" style="width: 30%"/>
+				<br><br>
+				<hr class="rounded">
+				<br>
+				 <h3>Web 3 Simple DAPP</h3>
+				<br>
+				<hr class="rounded">
+				<br>
+            </div>
+         </div>
+		 
+		 
+		 <br><br>
+		 
+		 
+         <div class="row text-center">
+            <div class="col-md-12">
+               <img id="metaicon" class="meta-gray" width="100" height="100" src="data:image/png;base64,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" alt="">
+            </div>
+         </div>
+         <div style="margin-top: 30px;" class="row text-center">
+            <div class="col-md-12">
+               <button id="enableMetamask" class="btn btn-primary">Connect with Metamask</button>
+            </div>
+         </div>
+         <br><br>
+         <div class="row text-center">
+            <div class="col-md-12">
+               <span id="status"></span>
+            </div>
+         </div>
+         <br><br>
+         <hr class="rounded">
+         <br><br>
+         <section class="contract-section hidden">
+            <div style="margin-top: 30px;" class="row text-center">
+               <div class="col-md-12">
+                  <h3>YODA TOKEN Contract Details</h3>
+                  </br>
+                  <h4>Binance Smart Chain (BSC) </h4>
+                  <br>
+                  <h6><a href="https://bscscan.com/address/0x809F244aFcbFB1435FF9e4b4EC00A758f4C4b8Ab">YODA token Contract ID : 0x809F244aFcbFB1435FF9e4b4EC00A758f4C4b8Ab </a></h6>
+               </div>
+            </div>
+            <br><br>
+            <hr class="solid">
+            <br><br>
+            <div class="row text-center">
+               <div class="col-md-12">
+                  <h4>Token Name</h4>
+                  <span><i id="name"></i></span>
+               </div>
+            </div>
+            <br><br>
+            <hr class="solid">
+            <br><br>
+            <div class="row text-center">
+               <div class="col-md-12">
+                  <h4>Token Symbol</h4>
+                  <span><i id="symbol"></i></span>
+               </div>
+            </div>
+            <br><br>
+            <hr class="solid">
+            <br><br>
+            <div class="row text-center">
+               <div class="col-md-12">
+                  <h4>Token Decimals</h4>
+                  <span><i id="decimals"></i></span>
+               </div>
+            </div>
+            <br><br>
+            <hr class="solid">
+            <br><br>
+            <div class="row text-center">
+               <div class="col-md-12">
+                  <h4>Token Supply</h4>
+                  <span> <i id="totalSupply"></i></span>
+               </div>
+            </div>
+            <br><br>
+            <hr class="solid">
+            <br><br>
+            <div class="row text-center">
+               <div class="col-md-12">
+                  <h4>Your Token Balance</h4>
+                  <span> <i id="balanceOf"></i></span>
+               </div>
+            </div>
+            <br><br>
+            <hr class="solid">
+            <br><br>
+            <div class="row text-center">
+               <div class="col-md-12">
+                  <h4>Balance of any address</h4>
+                  <span>
+                     <div class="col-md-6  offset-3"> 
+                        <input id="balanceOfAddress_value" type="text" class="form-control" value="">  
+                        <button id="balanceOfAddress" class="btn btn-primary"> Balance Of Address</button>   
+                  </span>
+                  </div>
+               </div>
+            </div>
+            <br>
+			
+			
+			
+			
+            <div class="row text-center" id="showBalanceResult">
+               <div class="col-md-12">
+                  <h4>Result </h4>
+                  <div class="col-md-4  offset-4"> 
+                     <input id="balanceOfAddressResult" type="text" class="form-control" value=""  style="text-align:center">  
+                  </div>
+               </div>
+            </div>
+			
+			
+			
+			
+			
+            <br><br>
+            <hr class="solid">
+            <br><br>
+            <div class="row text-center">
+               <div class="col-md-12">
+                  <h4>Token Transfer</h4>
+                  <br>
+                  <span>
+                     <strong>Transfer to </strong> (address receiver, uint256 numTokens) 
+                     <div class="col-md-6  offset-3"> 
+                        <input id="transfer_value" type="text" class="form-control" value="">     
+                        <button id="transfer" class="btn btn-primary"> Transfer To </button>   
+                  </span>
+                  </div>
+               </div>
+            </div>
+            <br>
+			
+            <div class="row text-center"  id="showTransferResult">
+               <div class="col-md-12">
+                  <h4>Result of Transfer</h4>
+                  <div class="col-md-6  offset-3"> 
+                     Transfer Status  <input id="Status_Transfer" type="text" class="form-control" value=""  style="text-align:center">   
+                  </div>
+                  <div class="col-md-6  offset-3"> 
+                     Balance Before <input id="balanceBeforeTransfer" type="text" class="form-control" value=""  style="text-align:center">  
+                  </div>
+                  <div class="col-md-6  offset-3"> 
+                     Balance After <input id="balanceAfterTransfer" type="text" class="form-control" value=""  style="text-align:center">  
+                  </div>
+                  <div class="col-md-6  offset-3"> 
+                     BlockHash <input id="BlockHash_Transfer" type="text" class="form-control" value=""  style="font-size:11px;text-align:center"> 
+                  </div>
+                  <div class="col-md-6  offset-3"> 
+                     BlockNumber <input id="BlockNumber_Transfer" type="text" class="form-control" value=""  style="text-align:center">  
+                  </div>
+                  <div class="col-md-6  offset-3"> 
+                     CumulativeGasUsed <input id="CumulativeGasUsed_Transfer" type="text" class="form-control" value=""  style="text-align:center">  
+                  </div>
+                  <div class="col-md-6  offset-3"> 
+                     GasUsed<input id="GasUsed_Transfer" type="text" class="form-control" value=""  style="text-align:center">  
+                  </div>
+               </div>
+            </div>
+			
+            <br><br>
+            <hr class="solid">
+            <br><br>
+            <div class="row text-center">
+               <div class="col-md-12">
+                  <h4>Token Approve</h4>
+                  <br>
+                  <span>
+                     <strong>Approve </strong> (address delegate, uint256 numTokens)
+                     <div class="col-md-6  offset-3"> 
+                        <input id="approve_value" type="text" class="form-control" value=""> 
+                        <button id="approve" class="btn btn-primary">Approve</button>
+                  </span>
+                  </div>
+               </div>
+            </div>
+            <br>
+			
+            <div class="row text-center"    id="showApproveResult">
+               <div class="col-md-12">
+                  <h4>Result of Approve</h4>
+                  <div class="col-md-6  offset-3"> 
+                     Approve Status  <input id="Status_Approve" type="text" class="form-control" value=""  style="text-align:center">   
+                  </div>
+                  <div class="col-md-6  offset-3"> 
+                     BlockHash <input id="BlockHash_Approve" type="text" class="form-control" value=""  style="font-size:11px;text-align:center"> 
+                  </div>
+                  <div class="col-md-6  offset-3"> 
+                     BlockNumber <input id="BlockNumber_Approve" type="text" class="form-control" value=""  style="text-align:center">  
+                  </div>
+                  <div class="col-md-6  offset-3"> 
+                     CumulativeGasUsed <input id="CumulativeGasUsed_Approve" type="text" class="form-control" value=""  style="text-align:center">  
+                  </div>
+                  <div class="col-md-6  offset-3"> 
+                     GasUsed<input id="GasUsed_Approve" type="text" class="form-control" value=""  style="text-align:center">  
+                  </div>
+               </div>
+            </div>
+			
+            <br><br>
+            <hr class="solid">
+            <br><br>
+			
+			
+            <div class="row text-center">
+               <div class="col-md-12">
+                  <h4>Token Transfer From </h4>
+                  <br>
+                  <span>
+                     <strong>Transfer From </strong> (address owner, address buyer, uint256 numTokens)
+                     <div class="col-md-8  offset-2"> 
+                        <input id="transferFrom_value" type="text" class="form-control" value=""> 
+                        <button id="transferFrom" class="btn btn-primary">TransferFrom</button>
+                  </span>
+                  </div>
+               </div>
+            </div>
+			<br>
+			
+			
+            <div class="row text-center"   id="showTransferFromResult">
+               <div class="col-md-12">
+                  <h4>Result of Transfer From</h4>
+                  <div class="col-md-6  offset-3"> 
+                     Transfer From Status  <input id="Status_TransferFrom" type="text" class="form-control" value=""  style="text-align:center">   
+                  </div>
+                  <div class="col-md-6  offset-3"> 
+                     Balance Before (Owner) <input id="balanceBeforeTransferFromOwner" type="text" class="form-control" value=""  style="text-align:center">  
+                  </div>
+                  <div class="col-md-6  offset-3"> 
+                     Balance After (Owner) <input id="balanceAfterTransferFromOwner" type="text" class="form-control" value=""  style="text-align:center">  
+                  </div>
+				  <div class="col-md-6  offset-3"> 
+                     Balance Before (Buyer) <input id="balanceBeforeTransferFromBuyer" type="text" class="form-control" value=""  style="text-align:center">  
+                  </div>
+                  <div class="col-md-6  offset-3"> 
+                     Balance After (Buyer) <input id="balanceAfterTransferFromBuyer" type="text" class="form-control" value=""  style="text-align:center">  
+                  </div>
+				  
+                  <div class="col-md-6  offset-3"> 
+                     BlockHash <input id="BlockHash_TransferFrom" type="text" class="form-control" value=""  style="font-size:11px;text-align:center"> 
+                  </div>
+                  <div class="col-md-6  offset-3"> 
+                     BlockNumber <input id="BlockNumber_TransferFrom" type="text" class="form-control" value=""  style="text-align:center">  
+                  </div>
+                  <div class="col-md-6  offset-3"> 
+                     CumulativeGasUsed <input id="CumulativeGasUsed_TransferFrom" type="text" class="form-control" value=""  style="text-align:center">  
+                  </div>
+                  <div class="col-md-6  offset-3"> 
+                     GasUsed<input id="GasUsed_TransferFrom" type="text" class="form-control" value=""  style="text-align:center">  
+                  </div>
+               </div>
+            </div>
+			
+			
+			
+           
+         </section>
+      </div>
+      <script>
+         let currentAccount = null;
+         let web3;
+         let Token_contractAddress = '0x809F244aFcbFB1435FF9e4b4EC00A758f4C4b8Ab'
+         let haveMetaMaskAccount = false;
+         
+         
+         document.getElementById('showBalanceResult').setAttribute("style", "display:none");
+         document.getElementById('showTransferResult').setAttribute("style", "display:none");
+         document.getElementById('showApproveResult').setAttribute("style", "display:none");
+		 document.getElementById('showTransferFromResult').setAttribute("style", "display:none");
+		  
+		  
+		 console.log('Hello, start');
+		 		
+
+		 
+         // Set up a timer and check when variable haveMetaMaskAccount is set to true, meaning a user is logged in and the app knows the users account address
+         (async() => {
+         while(!haveMetaMaskAccount) 
+         await new Promise(resolve => setTimeout(resolve, 1000));
+         	console.log('run get token details');
+			getTokenDetails();
+         })();
+         
+         
+      </script>
+      <script>   
+         $( document ).ready(function() 
+         {
+         
+             m = detectMetaMask()
+             if(m) {
+                 $('#metaicon').removeClass('meta-gray')
+                 $('#metaicon').addClass('meta-normal')
+                 $('#enableMetamask').attr('disabled',false)
+                 connect() // Make sure the connected wallet is being returned
+             } else {
+                 $('#enableMetamask').attr('disabled',true)
+                 $('#metaicon').removeClass('meta-normal')
+                 $('#metaicon').addClass('meta-gray')
+             }
+         
+             $('#enableMetamask').click(function() {
+                 connect()
+             });
+         
+             $('#transfer').click(function() {
+                 transfer()
+             });
+         
+         
+         $('#transferFrom').click(function() {
+                 transferFrom()
+             });
+         
+         
+         $('#approve').click(function() {
+                 approve()
+             });
+         
+         
+        
+         
+         
+         $('#balanceOfAddress').click(function() {
+                 balanceOfAddress()
+             });
+         
+         
+             try 
+         {   
+         web3 = new Web3(window.ethereum)
+             } 	catch (error) 
+         {
+                 alert(error)
+             }            
+         })
+      </script>  
+      <script> 
+         // Functions and abi definition here
+         
+         
+         	
+         var abi = [
+         	{
+         		"inputs": [],
+         		"stateMutability": "nonpayable",
+         		"type": "constructor"
+         	},
+         	{
+         		"anonymous": false,
+         		"inputs": [
+         			{
+         				"indexed": true,
+         				"internalType": "address",
+         				"name": "tokenOwner",
+         				"type": "address"
+         			},
+         			{
+         				"indexed": true,
+         				"internalType": "address",
+         				"name": "spender",
+         				"type": "address"
+         			},
+         			{
+         				"indexed": false,
+         				"internalType": "uint256",
+         				"name": "tokens",
+         				"type": "uint256"
+         			}
+         		],
+         		"name": "Approval",
+         		"type": "event"
+         	},
+         	{
+         		"anonymous": false,
+         		"inputs": [
+         			{
+         				"indexed": true,
+         				"internalType": "address",
+         				"name": "from",
+         				"type": "address"
+         			},
+         			{
+         				"indexed": true,
+         				"internalType": "address",
+         				"name": "to",
+         				"type": "address"
+         			},
+         			{
+         				"indexed": false,
+         				"internalType": "uint256",
+         				"name": "tokens",
+         				"type": "uint256"
+         			}
+         		],
+         		"name": "Transfer",
+         		"type": "event"
+         	},
+         	{
+         		"inputs": [
+         			{
+         				"internalType": "address",
+         				"name": "owner",
+         				"type": "address"
+         			},
+         			{
+         				"internalType": "address",
+         				"name": "delegate",
+         				"type": "address"
+         			}
+         		],
+         		"name": "allowance",
+         		"outputs": [
+         			{
+         				"internalType": "uint256",
+         				"name": "",
+         				"type": "uint256"
+         			}
+         		],
+         		"stateMutability": "view",
+         		"type": "function"
+         	},
+         	{
+         		"inputs": [
+         			{
+         				"internalType": "address",
+         				"name": "delegate",
+         				"type": "address"
+         			},
+         			{
+         				"internalType": "uint256",
+         				"name": "numTokens",
+         				"type": "uint256"
+         			}
+         		],
+         		"name": "approve",
+         		"outputs": [
+         			{
+         				"internalType": "bool",
+         				"name": "",
+         				"type": "bool"
+         			}
+         		],
+         		"stateMutability": "nonpayable",
+         		"type": "function"
+         	},
+         	{
+         		"inputs": [
+         			{
+         				"internalType": "address",
+         				"name": "tokenOwner",
+         				"type": "address"
+         			}
+         		],
+         		"name": "balanceOf",
+         		"outputs": [
+         			{
+         				"internalType": "uint256",
+         				"name": "",
+         				"type": "uint256"
+         			}
+         		],
+         		"stateMutability": "view",
+         		"type": "function"
+         	},
+         	{
+         		"inputs": [],
+         		"name": "decimals",
+         		"outputs": [
+         			{
+         				"internalType": "uint8",
+         				"name": "",
+         				"type": "uint8"
+         			}
+         		],
+         		"stateMutability": "view",
+         		"type": "function"
+         	},
+         	{
+         		"inputs": [],
+         		"name": "name",
+         		"outputs": [
+         			{
+         				"internalType": "string",
+         				"name": "",
+         				"type": "string"
+         			}
+         		],
+         		"stateMutability": "view",
+         		"type": "function"
+         	},
+         	{
+         		"inputs": [],
+         		"name": "symbol",
+         		"outputs": [
+         			{
+         				"internalType": "string",
+         				"name": "",
+         				"type": "string"
+         			}
+         		],
+         		"stateMutability": "view",
+         		"type": "function"
+         	},
+         	{
+         		"inputs": [],
+         		"name": "totalSupply",
+         		"outputs": [
+         			{
+         				"internalType": "uint256",
+         				"name": "",
+         				"type": "uint256"
+         			}
+         		],
+         		"stateMutability": "view",
+         		"type": "function"
+         	},
+         	{
+         		"inputs": [
+         			{
+         				"internalType": "address",
+         				"name": "receiver",
+         				"type": "address"
+         			},
+         			{
+         				"internalType": "uint256",
+         				"name": "numTokens",
+         				"type": "uint256"
+         			}
+         		],
+         		"name": "transfer",
+         		"outputs": [
+         			{
+         				"internalType": "bool",
+         				"name": "",
+         				"type": "bool"
+         			}
+         		],
+         		"stateMutability": "nonpayable",
+         		"type": "function"
+         	},
+         	{
+         		"inputs": [
+         			{
+         				"internalType": "address",
+         				"name": "owner",
+         				"type": "address"
+         			},
+         			{
+         				"internalType": "address",
+         				"name": "buyer",
+         				"type": "address"
+         			},
+         			{
+         				"internalType": "uint256",
+         				"name": "numTokens",
+         				"type": "uint256"
+         			}
+         		],
+         		"name": "transferFrom",
+         		"outputs": [
+         			{
+         				"internalType": "bool",
+         				"name": "",
+         				"type": "bool"
+         			}
+         		],
+         		"stateMutability": "nonpayable",
+         		"type": "function"
+         	},
+         	{
+         		"inputs": [],
+         		"stateMutability": "nonpayable",
+         		"type": "constructor"
+         	},
+         	{
+         		"anonymous": false,
+         		"inputs": [
+         			{
+         				"indexed": false,
+         				"internalType": "uint256",
+         				"name": "amount",
+         				"type": "uint256"
+         			}
+         		],
+         		"name": "Bought",
+         		"type": "event"
+         	},
+         	{
+         		"anonymous": false,
+         		"inputs": [
+         			{
+         				"indexed": false,
+         				"internalType": "uint256",
+         				"name": "amount",
+         				"type": "uint256"
+         			}
+         		],
+         		"name": "Sold",
+         		"type": "event"
+         	},
+         	{
+         		"inputs": [],
+         		"name": "buy",
+         		"outputs": [],
+         		"stateMutability": "payable",
+         		"type": "function"
+         	},
+         	{
+         		"inputs": [
+         			{
+         				"internalType": "uint256",
+         				"name": "amount",
+         				"type": "uint256"
+         			}
+         		],
+         		"name": "sell",
+         		"outputs": [],
+         		"stateMutability": "nonpayable",
+         		"type": "function"
+         	},
+         	{
+         		"inputs": [],
+         		"name": "token",
+         		"outputs": [
+         			{
+         				"internalType": "contract IERC20",
+         				"name": "",
+         				"type": "address"
+         			}
+         		],
+         		"stateMutability": "view",
+         		"type": "function"
+         	}
+         ]
+         
+         
+         
+                 function handleAccountsChanged(accounts) 
+         		{ 
+                     if (accounts.length === 0) 
+         			{
+                         $('#enableMetamask').html('Connect now with Metamask')
+                     } 
+         			else if (accounts[0] !== currentAccount) 
+         			{
+                         currentAccount = accounts[0];
+                         $('#enableMetamask').html(currentAccount)
+                         $('#status').html('Metamask CONNECTED')
+         
+                         if(currentAccount != null) 
+         				{
+                             // Set the button label
+                             $('#enableMetamask').html(currentAccount)
+         					haveMetaMaskAccount=true;
+                         }
+                     }
+                     console.log('WalletAddress in HandleAccountChanged ='+currentAccount)
+                 }
+         
+         
+                 function connect() 
+         		{
+                     ethereum
+                     .request({ method: 'eth_requestAccounts' })
+                     .then(handleAccountsChanged)
+                     .catch((err) => {
+                     if (err.code === 4001) {
+                         // EIP-1193 userRejectedRequest error
+                         // If this happens, the user rejected the connection request.
+                         console.log('Please connect to MetaMask.');
+                         $('#status').html('You refused to connect Metamask')
+                     } else {
+                         console.error(err);
+                     }
+                     });
+                 }
+         
+         
+         
+         
+         
+               function detectMetaMask() 
+         	  {
+         			if (typeof window.ethereum !== 'undefined') 
+         			{    
+                         return true
+                     } else 
+         			{ 
+                         return false
+                     }
+               }
+         
+         
+         	async function getTokenDetails() 
+         	{		console.log('In getTokenDetails function');
+         			const contractFirst = new web3.eth.Contract(
+                                 abi,
+                                 Token_contractAddress
+                     );
+         
+					console.log('Contract is');
+					console.log(contractFirst);
+					
+         			contractFirst.methods.totalSupply().call((err, result) => { console.log(result);$('#totalSupply').html(result) })
+         		    contractFirst.methods.balanceOf(currentAccount).call((err, result) => { console.log(result);$('#balanceOf').html(result) })
+         			contractFirst.methods.name().call((err, result) => { console.log(result);$('#name').html(result) })
+         			contractFirst.methods.symbol().call((err, result) => { console.log(result);$('#symbol').html(result) })
+         			contractFirst.methods.decimals().call((err, result) => { console.log(result);$('#decimals').html(result) })			
+         	}
+         
+         
+         	
+         	
+         	
+         	async function balanceOfAddress() 
+         	{		document.getElementById('showBalanceResult').setAttribute("style", "display:none");	
+         			input_value = $('#balanceOfAddress_value').val()
+         			
+                     const contractFirst = new web3.eth.Contract
+         			(
+                                 abi,
+                                 Token_contractAddress
+                     );
+         			
+         			contractFirst.methods.balanceOf(input_value).call((err, result) => 
+         			{  
+         			//$('#balanceOfAddressResult').html(result); 
+         			document.getElementById("balanceOfAddressResult").value = result;
+					document.getElementById('showBalanceResult').setAttribute("style", "display:block");
+         			}
+         			)
+         	}
+         
+         
+         
+             async function transfer() 
+         	{		
+					document.getElementById('showTransferResult').setAttribute("style", "display:none");	
+                    input_value = $('#transfer_value').val()
+         			const valueArray = input_value.split(',');
+         			const toAddress = valueArray[0];
+         			const value = valueArray[1];
+         			
+         			
+         			
+                     if(input_value.trim() == '') {
+                         input_value = 0
+                     }
+                     if(!isNaN(input_value)) {
+                         input_value = parseInt(input_value)   
+                     }
+         
+         
+         			const contractFirst = new web3.eth.Contract(
+                                 abi,
+                                 Token_contractAddress
+                     );
+         		
+         			
+         			 
+         			const expectedBlockTime = 5000; 
+         			//const receiverAddress = input_value
+         			
+         			
+         			const sleep = (milliseconds) => {
+         					return new Promise(resolve => setTimeout(resolve, milliseconds))
+         				}
+         			
+         			(async function () 
+         			{
+         			let starting_balance = await contractFirst.methods.balanceOf(currentAccount).call();
+         			
+         			contractFirst.methods.transfer(toAddress, value).send({from: currentAccount}, async function(error, transactonHash) {
+         					console.log("Submitted transaction with hash: ", transactonHash)
+         					let transactionReceipt = null
+         					while (transactionReceipt == null) { // Waiting expectedBlockTime until the transaction is mined
+         							transactionReceipt = await web3.eth.getTransactionReceipt(transactonHash);
+         							await sleep(expectedBlockTime)
+         					}
+         				
+         				
+         				console.log("Got the transaction receipt: ", transactionReceipt)
+         				console.log('Test few trans receipt values');
+         				console.log('Block Number');
+         				console.log(transactionReceipt.blockNumber);
+         				console.log('Block Hash');
+         				console.log(transactionReceipt.blockHash);
+         				console.log('Cumulative Gas Used');
+         				console.log(transactionReceipt.cumulativeGasUsed);
+         				console.log('Gas Used');
+         				console.log(transactionReceipt.gasUsed);
+         				
+         				
+         				console.log('Status');
+         				console.log(transactionReceipt.status);
+         				
+         				
+         				
+         				let final_balance = await contractFirst.methods.balanceOf(currentAccount).call();
+         				
+						
+						
+						document.getElementById('showTransferResult').setAttribute("style", "display:block");	
+						
+						
+						
+         				console.log('Starting balance was:', starting_balance);
+         				console.log('Ending balance is:', final_balance);
+         				
+         				document.getElementById("balanceBeforeTransfer").value = starting_balance;
+         				document.getElementById("balanceAfterTransfer").value = final_balance;
+         				$('#balanceOf').html(final_balance) 
+         				
+         				
+         				document.getElementById("BlockHash_Transfer").value = transactionReceipt.blockHash;
+         				document.getElementById("BlockNumber_Transfer").value = transactionReceipt.blockNumber;
+         				document.getElementById("CumulativeGasUsed_Transfer").value = transactionReceipt.cumulativeGasUsed;
+         				document.getElementById("GasUsed_Transfer").value = transactionReceipt.gasUsed;
+         				document.getElementById("Status_Transfer").value = transactionReceipt.status;
+         				
+         				//document.getElementById("array_Transfer").value = JSON.stringify(transactionReceipt);
+         				
+         				
+         				
+         				});
+          
+         			})();
+         			
+         			
+         	}
+         		
+         
+         
+         		
+         		
+         		
+         	async function transferFrom() 
+         	{
+                     document.getElementById('showTransferFromResult').setAttribute("style", "display:none");	
+                     input_value = $('#transferFrom_value').val()
+         			
+                     if(input_value.trim() == '') 
+         			{
+                         input_value = 0
+                     }
+                     if(!isNaN(input_value)) 
+         			{
+                         input_value = parseInt(input_value)
+                     }
+         
+         			const valueArray = input_value.split(',');
+         			const senderAddress = valueArray[0];
+         			const recipientAddress = valueArray[1];
+         			const value = valueArray[2];
+         			
+         			const contractFirst = new web3.eth.Contract(
+                                 abi,
+                                 Token_contractAddress
+                     );
+         		
+				
+				
+					const expectedBlockTime = 5000; 
+         			const sleep = (milliseconds) => {
+         					return new Promise(resolve => setTimeout(resolve, milliseconds))
+         				}
+				
+					
+					(async function () 
+         			{
+         			let starting_balance_sender = await contractFirst.methods.balanceOf(senderAddress).call();
+         			let starting_balance_recipient = await contractFirst.methods.balanceOf(recipientAddress).call();
+					
+					console.log('Get starting balances');
+					console.log('Get Sender Balance B4');
+					console.log(starting_balance_sender);
+					console.log('Get Recipient Balance B4');
+					console.log(starting_balance_recipient);
+					
+					
+					
+         			contractFirst.methods.transferFrom(senderAddress,recipientAddress,value).send({from: currentAccount}, async function(error, transactonHash) {
+         					console.log("Submitted transaction with hash: ", transactonHash)
+         					let transactionReceipt = null
+         					while (transactionReceipt == null) { // Waiting expectedBlockTime until the transaction is mined
+         							transactionReceipt = await web3.eth.getTransactionReceipt(transactonHash);
+         							await sleep(expectedBlockTime)
+         					}
+         				
+         				document.getElementById('showTransferFromResult').setAttribute("style", "display:block");	
+         				console.log("Got the transfer from transaction receipt: ", transactionReceipt)
+         				console.log('Test few trans receipt values');
+         				console.log('Block Number');
+         				console.log(transactionReceipt.blockNumber);
+         				console.log('Block Hash');
+         				console.log(transactionReceipt.blockHash);
+         				console.log('Cumulative Gas Used');
+         				console.log(transactionReceipt.cumulativeGasUsed);
+         				console.log('Gas Used');
+         				console.log(transactionReceipt.gasUsed);
+         				
+         				
+         				console.log('Status');
+         				console.log(transactionReceipt.status);
+         				
+         				
+         				
+         				let final_balance_sender = await contractFirst.methods.balanceOf(senderAddress).call();
+         				let final_balance_recipient = await contractFirst.methods.balanceOf(recipientAddress).call();
+						
+						
+						
+						
+         				console.log('Starting balance sender was:', starting_balance_sender);
+         				console.log('Final balance sender is:', final_balance_sender);
+						
+						console.log('Starting balance recipient was:', starting_balance_recipient);
+         				console.log('Final balance recipient is:', final_balance_recipient);
+						
+						
+						
+						
+						
+         				
+         				document.getElementById("balanceBeforeTransferFromOwner").value = starting_balance_sender;
+						document.getElementById("balanceAfterTransferFromOwner").value = final_balance_sender;	
+						
+						document.getElementById("balanceBeforeTransferFromBuyer").value = starting_balance_recipient;
+						document.getElementById("balanceAfterTransferFromBuyer").value = final_balance_recipient;
+						
+						
+						
+         				
+         				document.getElementById("BlockHash_TransferFrom").value = transactionReceipt.blockHash;
+         				document.getElementById("BlockNumber_TransferFrom").value = transactionReceipt.blockNumber;
+         				document.getElementById("CumulativeGasUsed_TransferFrom").value = transactionReceipt.cumulativeGasUsed;
+         				document.getElementById("GasUsed_TransferFrom").value = transactionReceipt.gasUsed;
+         				document.getElementById("Status_TransferFrom").value = transactionReceipt.status;
+         				
+         				//document.getElementById("array_Transfer").value = JSON.stringify(transactionReceipt);
+         				
+         				
+         				
+         				});
+          
+         			})();
+         			
+				
+				
+				
+				
+				
+			
+         
+             }
+         		
+         		
+         		
+         		
+         		
+         		
+         		
+         		
+         	async function approve() 
+         	{
+					document.getElementById('showApproveResult').setAttribute("style", "display:none");	
+                    input_value = $('#approve_value').val()
+         			
+         			if(input_value.trim() == '') 
+         			{
+                         input_value = 0
+                     }
+                     if(!isNaN(input_value)) 
+         			{
+                         input_value = parseInt(input_value)
+                     }
+         
+         			const valueArray = input_value.split(',');
+         			const approveAddress = valueArray[0];
+         			const value = valueArray[1];
+         		
+         			const contractFirst = new web3.eth.Contract(
+                                 abi,
+                                 Token_contractAddress
+                     );
+         			
+         			
+         			
+         			const expectedBlockTime = 5000; 
+         			const sleep = (milliseconds) => {
+         					return new Promise(resolve => setTimeout(resolve, milliseconds))
+         				}
+         			
+         			
+         			(async function () 
+         			{
+         			//let starting_balance = await contractFirst.methods.balanceOf(currentAccount).call();
+         			
+         				contractFirst.methods.approve(approveAddress, value).send({from: currentAccount}, async function(error, transactonHash) {
+         					console.log("Submitted approve Transaction with hash: ", transactonHash)
+         					let transactionReceipt = null
+         					while (transactionReceipt == null) { // Waiting expectedBlockTime until the transaction is mined
+         							transactionReceipt = await web3.eth.getTransactionReceipt(transactonHash);
+         							await sleep(expectedBlockTime)
+         					}
+         				
+						
+						document.getElementById('showApproveResult').setAttribute("style", "display:block");	
+         				console.log("Got the approve transaction receipt: ", transactionReceipt)
+         				console.log('Test few trans receipt values');
+         				console.log('Block Number');
+         				console.log(transactionReceipt.blockNumber);
+         				console.log('Block Hash');
+         				console.log(transactionReceipt.blockHash);
+         				console.log('Cumulative Gas Used');
+         				console.log(transactionReceipt.cumulativeGasUsed);
+         				console.log('Gas Used');
+         				console.log(transactionReceipt.gasUsed);
+         				console.log('Status');
+         				console.log(transactionReceipt.status);
+         				
+         			//	let final_balance = await contractFirst.methods.balanceOf(currentAccount).call();
+         				
+         			//	console.log('Starting balance was:', starting_balance);
+         			//	console.log('Ending balance is:', final_balance);
+         				
+         			//	document.getElementById("balanceBeforeTransfer").value = starting_balance;
+         			//	document.getElementById("balanceAfterTransfer").value = final_balance;
+         			//	$('#balanceOf').html(final_balance) 
+         				
+         				document.getElementById("BlockHash_Approve").value = transactionReceipt.blockHash;
+         				document.getElementById("BlockNumber_Approve").value = transactionReceipt.blockNumber;
+         				document.getElementById("CumulativeGasUsed_Approve").value = transactionReceipt.cumulativeGasUsed;
+         				document.getElementById("GasUsed_Approve").value = transactionReceipt.gasUsed;
+         				document.getElementById("Status_Approve").value = transactionReceipt.status;
+         				});
+          
+         			})();
+         			
+         			
+         			
+         
+             }
+         		
+         	
+          
+         			
+      </script>
+   </body>
+</html>
