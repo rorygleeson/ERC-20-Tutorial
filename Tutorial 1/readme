@@ -12,3 +12,8 @@ We will use Metamask and Remix IDE. We use the OpenZeppelin standards to do the 
 
 The code is written in Solidity and compiled in Remix. Remix also deploys the contract (MetaMask does not support deploying contracts). 
 
+A simple DAPP is included, this is a WEB 3.0 DAPP that can be used to interact with the YODA token. The DAPP is fully contained with the YodaTokenDapp.html.
+The DAPP uses JS (Web3) + Html + Css. It will run on a standard web server (all front end driven). No special application server required. To get the  YodaTokenDapp.html working 
+with your own ERC20 token, you need to update the following:
+
+Token_contractAddress     << Change this to your own contract address
