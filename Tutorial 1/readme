@@ -17,3 +17,4 @@ The DAPP uses JS (Web3) + HTML + CSS. It will run on a standard web server (all 
 with your own ERC20 token, you need to update the following:
 
 Token_contractAddress     << Change this to your own contract address
+Live DAPP can be found here: http://myweb3dapp.s3-website-us-west-2.amazonaws.com/
