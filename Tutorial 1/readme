@@ -8,13 +8,16 @@ Using the online Remix IDE means we do not need to install any tools locally. Th
 
 The tutorial aims to show all steps involved in deploying an ERC 20 smart contract to the blockchain.
 
-We will use Metamask and Remix IDE. We use the OpenZeppelin standards to do the heavy lifting and really simplify (and secure) the SmartContract we deploy.
+We will use Metamask with Remix IDE (Environment = Web 3 Injected). We use the OpenZeppelin standards to do the heavy lifting and really simplify (and secure) the SmartContract we deploy.
 
 The code is written in Solidity and compiled in Remix. Remix also deploys the contract (MetaMask does not support deploying contracts). 
 
 A simple DAPP is included, this is a WEB 3.0 DAPP that can be used to interact with the YODA token. The DAPP is fully contained with the YodaTokenDapp.html.
-The DAPP uses JS (Web3) + HTML + CSS. It will run on a standard web server (all front end driven). No special application server required. To get the  YodaTokenDapp.html working 
+The DAPP uses JS (Web3) + HTML + CSS. It will run on a standard web server (all front end driven). No special application server required. 
+Demo here (hosted on S3) : www.yodadex.com 
+Source code included in this folder. 
+
+To get the  YodaTokenDapp.html working 
 with your own ERC20 token, you need to update the following:
 
 Token_contractAddress     << Change this to your own contract address
-Live DAPP can be found here: http://myweb3dapp.s3-website-us-west-2.amazonaws.com/
